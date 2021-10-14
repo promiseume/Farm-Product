@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
 mongoose.connect('mongodb://localhost:27017/farmStand')
 .then(()=> {
    console.log('connection opened')
@@ -8,7 +10,7 @@ mongoose.connect('mongodb://localhost:27017/farmStand')
     console.log(err)
 });
 
-const productSchema = new mongoose.Schema({
+const productSchema = new Schema({
     name:{
        type: String,
        required: true
@@ -22,6 +24,10 @@ const productSchema = new mongoose.Schema({
       type: String,
       lowercase: true,
       enum : ['fruit','vegetables','dairy']
+    },
+    farm:{
+       type: Schema.Types.ObjectId,
+       ref: 'Farm'
     }
 })
 
